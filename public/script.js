@@ -24,7 +24,7 @@ function updateMinValue() {
 };
 
 (function connect(){
-    let socket = io.connect('http://localhost:5000');
+    let socket = io.connect(socketUrl);
 		socket.on('ramUsage', data => {
       data = data.reverse();
 			ramEl.innerHTML = `<a class='number'>${data[0]['freeRam']}</a>GB / <a class='number'>${data[0]['totalRam']}</a>GB`;
