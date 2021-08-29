@@ -47,13 +47,24 @@ body {
 
 table {
   border-collapse: collapse;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
 }
 
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+	text-align: center;
+}
+
+#chart_div {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.logs {
+	width: 60%;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }

@@ -60,12 +60,13 @@ io.on('connection', socket => {
       usedRam = totalRam - freeRam;
       ramStats['freeRam'] = Number.parseFloat(usedRam / 1024 / 1024 / 1024).toFixed(2);
       ramStats['totalRam'] = Number.parseFloat(totalRam / 1024 / 1024 / 1024).toFixed(2);
+      ramStats['raw'] = usedRam;
       if (ramStats['freeRam'] != oldRam) {
         var now = new Date();
         ramStats['time'] = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        oldRam = ramStats['freeRam'];
+        oldRam = ramStats['freeRam'] / 1024;
         logs.push({...ramStats});
         io.sockets.emit('ramUsage', logs);
       }
-    }, 2000)
+    }, 5000)
 })
