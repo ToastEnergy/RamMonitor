@@ -1,0 +1,19 @@
+{
+  "name": "rammonitor",
+  "version": "1.0.0",
+  "description": "monitor ram usage",
+  "main": "main.js",
+  "scripts": {
+    "run": "node main.js"
+  },
+  "keywords": [
+    "ram"
+  ],
+  "author": "ssebastianoo",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.3"
+  }
+}

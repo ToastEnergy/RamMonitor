@@ -1,0 +1,59 @@
+body {
+	font-family: 'Ubuntu Mono', monospace;
+	background: #2b2b2b;
+	color: white;
+	overflow-x: hidden;
+}
+
+.header {
+	margin-top: 100px;
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+.ramInfo {
+	margin-top: 100px;
+}
+
+.ramInfo span {
+	background: #fc4949;
+	padding: 12px 12px;
+	border-radius: 5px;
+}
+
+.number {
+	background: RGBA(0,0,0,0.1);
+	padding: 5px 5px;
+	border-radius: 6px;
+}
+
+.save-logs {
+	font-size: 150%;
+	text-align: center;
+}
+
+.save-logs span {
+	cursor: pointer;
+	color: #fc4949;
+	background: white;
+	padding: 7px 7px;
+	border-radius: 5px;
+	transition-duration: .2s;
+}
+
+.save-logs span:hover {
+	box-shadow: 3px 3px #fc4949;
+}
+
+table {
+  border-collapse: collapse;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
