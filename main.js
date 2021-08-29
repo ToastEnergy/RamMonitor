@@ -13,6 +13,10 @@ let logs = [];
 let freeRam;
 let oldRam;
 
+if (!fs.existsSync('./logs')) {
+  fs.mkdirSync('./logs');
+}
+
 app.engine('.html', require('ejs').__express);
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
