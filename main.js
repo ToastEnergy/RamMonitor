@@ -5,7 +5,6 @@ const path = require('path');
 const os = require("os");
 const fs = require('fs');
 const app = express();
-let text = 'godo';
 
 let ramStats = {};
 let totalRam = os.totalmem();
