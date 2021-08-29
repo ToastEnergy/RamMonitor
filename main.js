@@ -116,7 +116,7 @@ app.get('/saveLogs', (req, res) => {
   res.send({message: 'ok', filename: filename})
 });
 
-const server = app.listen(config.port, () => {
+const server = app.listen(port, () => {
   console.log(`listening at ${socketUrl}`)
 })
 
