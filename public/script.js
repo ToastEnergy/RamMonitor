@@ -32,10 +32,14 @@ function updateMinValue() {
 (function connect(){
     let socket = io.connect(socketUrl);
 		socket.on('ramUsage', data => {
+      console.log(data)
       chartLogs = data['chartLogs'];
       allLogs = data['allLogs'];
       data = data['logs'].reverse();
-			ramEl.innerHTML = `<a class='number'>${data[0]['freeRam']}</a>GB / <a class='number'>${data[0]['totalRam']}</a>GB`;
+      if(data.length===0){
+        return
+      }
+      ramEl.innerHTML = `<a class='number'>${data[0]['freeRam']}</a>GB / <a class='number'>${data[0]['totalRam']}</a>GB`;
       var now = new Date();
       var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
       updateMinValue();
