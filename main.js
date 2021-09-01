@@ -128,13 +128,13 @@ const server = app.listen(port, () => {
 })
 
 setInterval(function() {
-  freeRam = os.freemem();
-  usedRam = totalRam - freeRam;
   if(process.platform==='linux'){
-    ramStats['freeRam'] = (Number.parseFloat(/MemAvailable:[ ]+(\d+)/.exec(fs.readFileSync('/proc/meminfo', 'utf8'))[1])/1024/1024).toFixed(2)
+    freeRam= Number.parseFloat(/MemAvailable:[ ]+(\d+)/.exec(fs.readFileSync('/proc/meminfo', 'utf8'))[1]*1024)
   }else{
-    ramStats['freeRam'] = Number.parseFloat(usedRam / 1024 / 1024 / 1024).toFixed(2);
+    freeRam = os.freemem();
   }
+  usedRam = totalRam - freeRam;
+  ramStats['freeRam'] = Number.parseFloat(usedRam / 1024 / 1024 / 1024).toFixed(2);
   ramStats['totalRam'] = Number.parseFloat(totalRam / 1024 / 1024 / 1024).toFixed(2);
   ramStats['raw'] = usedRam;
   if (ramStats['freeRam'] != oldRam) {
