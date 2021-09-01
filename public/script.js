@@ -53,18 +53,16 @@ function updateMinValue() {
 })();
 
 async function saveLogs() {
-  console.log(allLogs);
-  let newLogs = [];
-  if (allLogs.length <= 9) {
+  let newLogs = [['time', 'ram']];
+  if (allLogs.length <= 10) {
     newLogs = [...allLogs];
   } else {
-    var last = allLogs.length;
-    var middle = last / 2 + 1;
-    [0, last, middle, last / 2; (middle + last / 2)]
-    newLogs.push(allLogs[0]);
-    newLogs
+    var d = Math.floor(allLogs.length/10)
+    for (i = 1; i < allLogs.length; i=i+d) {
+        newLogs.push(allLogs[i]);
+      }
   }
-  var data = google.visualization.arrayToDataTable(allLogs);
+  var data = google.visualization.arrayToDataTable(newLogs);
   var options = {
     width: 1920,
     height: 1080,
