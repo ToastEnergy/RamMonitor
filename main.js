@@ -117,9 +117,9 @@ app.get('/saveLogs', (req, res) => {
   s = checkTime(s);
   d = checkTime(d);
   h = checkTime(h);
-  let filename = `${d}-${mo}-${y}-${h}-${m}-${s}.json`
+  let filename = `${d}-${mo}-${y}-${h}-${m}-${s}`
   let data = JSON.stringify(logs, null, 2);
-  fs.writeFileSync(path.resolve(__dirname, `./logs/${filename}`), data);
+  fs.writeFileSync(path.resolve(__dirname, `./logs/${filename},json`), data);
   res.send({message: 'ok', filename: filename})
 });
 
