@@ -73,9 +73,12 @@ const socketUrl = `${protocol}://${host}:${port}`;
 
 let ramStats = {};
 let totalRam = os.totalmem();
+let allLogs = [['time', 'ram']];
+let chartLogs = [['time', 'ram']];
 let logs = [];
 let freeRam;
 let oldRam;
+let send = true;
 
 if (!fs.existsSync('./logs')) { fs.mkdirSync('./logs'); }
 
@@ -91,6 +94,10 @@ function checkTime(i) {
 
 app.get('/', (req, res) => {
   res.render('index', {'socketUrl': socketUrl});
+});
+
+app.get('/chart', (req, res) => {
+  res.render('chart', {'logs': allLogs.toString()});
 });
 
 app.get('/socketUrl', (req, res) => {
@@ -117,23 +124,33 @@ app.get('/saveLogs', (req, res) => {
 });
 
 const server = app.listen(port, () => {
-  console.log(`listening at ${socketUrl}`)
+  console.log(`listening at ${socketUrl}`);
 })
+
+setInterval(function() {
+  freeRam = os.freemem();
+  usedRam = totalRam - freeRam;
+  ramStats['freeRam'] = Number.parseFloat(usedRam / 1024 / 1024 / 1024).toFixed(2);
+  ramStats['totalRam'] = Number.parseFloat(totalRam / 1024 / 1024 / 1024).toFixed(2);
+  ramStats['raw'] = usedRam;
+  if (ramStats['freeRam'] != oldRam) {
+    var now = new Date();
+    ramStats['time'] = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    chartLogs.push([ramStats['time'], parseFloat(ramStats['freeRam'])]);
+    allLogs.push([ramStats['time'], parseFloat(ramStats['freeRam'])]);
+    if (chartLogs.length >= 10) { chartLogs.splice(1, 1); };
+    oldRam = ramStats['freeRam'] / 1024;
+    logs.push({...ramStats});
+    send = true;
+  };
+}, 3000)
 
 const io = socketio(server);
 io.on('connection', socket => {
-    setInterval(function() {
-      freeRam = os.freemem();
-      usedRam = totalRam - freeRam;
-      ramStats['freeRam'] = Number.parseFloat(usedRam / 1024 / 1024 / 1024).toFixed(2);
-      ramStats['totalRam'] = Number.parseFloat(totalRam / 1024 / 1024 / 1024).toFixed(2);
-      ramStats['raw'] = usedRam;
-      if (ramStats['freeRam'] != oldRam) {
-        var now = new Date();
-        ramStats['time'] = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-        oldRam = ramStats['freeRam'] / 1024;
-        logs.push({...ramStats});
-        io.sockets.emit('ramUsage', logs);
-      }
-    }, 3000)
+  setInterval(function() {
+    if (send) {
+      io.sockets.emit('ramUsage', {logs: logs, chartLogs: chartLogs, allLogs: allLogs});
+      send = false;
+    };
+  }, 10)
 })
