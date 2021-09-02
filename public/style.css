@@ -12,6 +12,7 @@ body {
 }
 
 .header {
+	margin-top: 40px;
 	text-align: center;
 }
 
@@ -20,12 +21,6 @@ body {
 	color: #111213;
 	padding: 7px 7px;
 	border-radius: 5px;
-}
-
-.number {
-	background: RGBA(0,0,0,0.1);
-	padding: 5px 5px;
-	border-radius: 6px;
 }
 
 .save-logs {
@@ -58,7 +53,19 @@ td, th {
 }
 
 #chart_div {
-	margin-top: 19px;
-	margin-bottom: 5px;
+	margin-top: 12px;
+	margin-bottom: 3px;
 	width: 80%;
+}
+
+#speed circle {
+	fill: #111213 !important;
+}
+
+text {
+	fill: white !important;
+}
+
+#chart_div div div div svg g:last-child g:last-child text { 
+	fill: black !important;
 }
