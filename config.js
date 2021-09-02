@@ -1,6 +1,6 @@
 var config = {
-	protocol: 'http',
-	host: '192.168.1.41',
-	port: process.env.PORT || 5000
+    host: 'localhost',
+    port: 5000,
+    protocol: 'http'
 };
 module.exports = config;

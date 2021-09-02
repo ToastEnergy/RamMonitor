@@ -20,9 +20,15 @@ function drawChart(logs=null, options=null, div=chartDiv) {
   if (!options) {
     options = {
       curveType: 'function',
-      pointSize: 5
+      pointSize: 5,
+      backgroundColor: {
+        fill: '#111213'
+      },
+      series: {
+        0: {color: "#f5ca84"}
+      }
     };
-  } 
+  };
 
   var data = google.visualization.arrayToDataTable(logs);
   var chart = new google.visualization.LineChart(div);
@@ -48,7 +54,7 @@ function drawSpeed() {
     animation: {
       "startup": true,
       "easing": "linear"
-    } 
+    }
   };
   
   speedChart = new google.visualization.Gauge(speed);
