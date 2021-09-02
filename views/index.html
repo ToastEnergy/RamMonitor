@@ -18,10 +18,13 @@
       </div>
       <p class="save-logs" onclick="saveLogs();"><span>Save Logs</span></p>
       <div class="logs">
-        <div id="chart_div"></div>
+        <div class="charts">
+          <div id="speed"></div>
+          <div id="chart_div"></div>
+        </div>
         <table id="history"></table>
       </div>
-    </div>
+    </div>  
     <div id="all_chart_div" style="display:none"></div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js" integrity="sha512-PU5S6BA03fRv1Q5fpwXjg5nlRrgdoguZ74urFInkbABMCENyx5oP3hrDzYMMPh3qdLdknIvrGj3yqZ4JuU7Nag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
