@@ -34,7 +34,7 @@ function drawChart(logs=null, options=null, div=chartDiv) {
 function drawSpeed() {
   speedData = google.visualization.arrayToDataTable([
     ['Label', 'Value'],
-    ['Memory', 0]
+    ['RAM', 0]
   ]);
 
   const quarter = totalRam-totalRam / 4;
@@ -68,7 +68,6 @@ function drawSpeed() {
       totalRam = data[0]['totalRam'];
       if (!drewSpeed) {drawSpeed(); drewSpeed = true;};
 
-      ramEl.innerHTML = `<a class='number'>${data[0]['freeRam']}</a>GB / <a class='number'>${totalRam}</a>GB`;
       speedData.setValue(0, 1, parseFloat(data[0]['freeRam']));
       speedChart.draw(speedData, speedOptions);
       drawChart(chartLogs);

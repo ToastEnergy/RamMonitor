@@ -14,14 +14,15 @@
     <div class="container">
       <div class="header">
         <h1>Ram Usage</h1>
-        <h1 class="ramInfo"><span id="ram">loading...</span></h1>
-      </div>
-      <p class="save-logs" onclick="saveLogs();"><span>Save Logs</span></p>
-      <div class="logs">
-        <div class="charts">
-          <div id="speed"></div>
-          <div id="chart_div"></div>
+        <div class="center">
+          <div id="speed">loading...</div>
         </div>
+      </div>
+      <div class="center">
+        <div id="chart_div"></div>
+      </div>
+      <p class="save-logs"><span onclick="saveLogs();">Save Logs</span></p>
+      <div class="center">
         <table id="history"></table>
       </div>
     </div>  

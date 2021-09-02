@@ -5,9 +5,14 @@ body {
 	overflow-x: hidden;
 }
 
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .header {
 	text-align: center;
-	margin-bottom: 100px;
 }
 
 .ramInfo {
@@ -37,7 +42,7 @@ body {
 	background: white;
 	padding: 7px 7px;
 	border-radius: 5px;
-	transition-duration: .2s;
+	transition-duration: .3s;
 }
 
 .save-logs span:hover {
@@ -45,33 +50,18 @@ body {
 }
 
 table {
-  border-collapse: collapse;
-	width: 100%;
+	border-collapse: collapse;
 }
 
 td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
 	text-align: center;
 }
 
 #chart_div {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	width: 72%;
-	margin-left: 20px;
-}
-
-.charts { 
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.logs {
-	width: 60%;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 80%;
 }

@@ -147,7 +147,7 @@ setInterval(function() {
     logs.push({...ramStats});
     send = true;
   };
-}, 3000)
+}, 2000)
 
 const io = socketio(server);
 io.on('connection', socket => {
