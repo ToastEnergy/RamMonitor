@@ -73,7 +73,7 @@ const socketUrl = `${protocol}://${host}:${port}`;
 
 let ramStats = {};
 let totalRam = os.totalmem();
-let allLogs = [['time', 'ram']];
+let allLogs = [];
 let chartLogs = [];
 let logs = [];
 let freeRam;

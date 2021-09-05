@@ -14,6 +14,8 @@ let speedChart;
 var ctx = document.getElementById('lineChart').getContext('2d');
 var lineChart = new Chart(ctx, {
   type: 'line',
+  responsive: false,
+  maintainAspectRatio: false,
   data: { 
       labels: [],
       datasets: [{
@@ -117,30 +119,9 @@ async function saveLogs() {
   let res = await fetch('/saveLogs');
   let json = await res.json();
 
-  let newLogs = [['time', 'ram']];
-
-  if (allLogs.length <= 10) {
-    newLogs = [...allLogs];
-  } else {
-    var d = Math.floor(allLogs.length/7)
-    for (i = 1; i < allLogs.length; i=i+d) {
-        newLogs.push(allLogs[i]);
-      };
-  };
-
-  var options = {
-    width: 1920,
-    height: 1080,
-    curveType: 'function'
-  };
-
-  allChartDiv.style.display = 'unset';
-
-  var chart = drawChart(newLogs, options, allChartDiv);
-  var imgUri = chart.getImageURI((1920, 1080));
-
-  downloadImage(imgUri, json['filename'])
-  allChartDiv.style.display = 'none';
+  var image = lineChart.toBase64Image();
+  window.open(image);
+  console.log(image);
 
   alert(`logs saved on logs/${json['filename']}.json`);
 }

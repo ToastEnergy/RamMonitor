@@ -52,10 +52,10 @@ td, th {
 	text-align: center;
 }
 
-#lineChart {
+.chart {
 	margin-top: 12px;
 	margin-bottom: 3px;
-	width: 80%;
+	width: 60%;
 }
 
 #speed circle {
