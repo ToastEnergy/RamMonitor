@@ -1,7 +1,6 @@
 const ramEl = document.getElementById('ram');
 const speed = document.getElementById('speed');
 const history = document.getElementById('history');
-const chartDiv = document.getElementById('chart_div');
 const allChartDiv = document.getElementById('all_chart_div');
 let chartLogs;
 let totalRam;
@@ -12,30 +11,35 @@ let speedData;
 let speedOptions;
 let speedChart;
 
-google.charts.load('current', {'packages':['corechart', 'gauge']});
-
-function drawChart(logs=null, options=null, div=chartDiv) {
-  if (!logs) {return;};
-
-  if (!options) {
-    options = {
-      curveType: 'function',
-      pointSize: 5,
-      backgroundColor: {
-        fill: '#111213'
-      },
-      series: {
-        0: {color: "#f5ca84"}
+var ctx = document.getElementById('lineChart').getContext('2d');
+var lineChart = new Chart(ctx, {
+  type: 'line',
+  data: { 
+      labels: [],
+      datasets: [{
+          label: 'RAM',
+          data: [],
+          borderColor: [
+            "#e8ff8a",
+            "#e8ff8a",
+            "#e8ff8a",
+            "#e8ff8a",
+            "#e8ff8a",
+            "#e8ff8a"
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+      scales: {
+          x: {
+              beginAtZero: false
+          }
       }
-    };
-  };
-
-  var data = google.visualization.arrayToDataTable(logs);
-  var chart = new google.visualization.LineChart(div);
+  }   
+});
   
-  chart.draw(data, options);
-  return chart;
-};
+google.charts.load('current', {'packages': ['gauge']});
 
 function drawSpeed() {
   speedData = google.visualization.arrayToDataTable([
@@ -72,11 +76,18 @@ function drawSpeed() {
       if (data.length === 0) { return; };
 
       totalRam = data[0]['totalRam'];
-      if (!drewSpeed) {drawSpeed(); drewSpeed = true;};
 
+      if (!drewSpeed) {drawSpeed(); drewSpeed = true;};
       speedData.setValue(0, 1, parseFloat(data[0]['freeRam']));
       speedChart.draw(speedData, speedOptions);
-      drawChart(chartLogs);
+
+      lineChart.data.labels = [];
+      lineChart.data.datasets[0].data = [];
+      chartLogs.forEach(log => {
+        lineChart.data.labels.push(log[0]);
+        lineChart.data.datasets[0].data.push(log[1]);
+      });
+      lineChart.update();
 
       var logs = document.createElement('div');
       var tableTitles = document.createElement('tr'); tableTitles.innerHTML = `<th>time</th><th>ram</th>`;

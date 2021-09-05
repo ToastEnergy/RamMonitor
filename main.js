@@ -74,7 +74,7 @@ const socketUrl = `${protocol}://${host}:${port}`;
 let ramStats = {};
 let totalRam = os.totalmem();
 let allLogs = [['time', 'ram']];
-let chartLogs = [['time', 'ram']];
+let chartLogs = [];
 let logs = [];
 let freeRam;
 let oldRam;
@@ -128,9 +128,9 @@ const server = app.listen(port, () => {
 })
 
 setInterval(function() {
-  if(process.platform==='linux'){
+  if (process.platform==='linux') {
     freeRam= Number.parseFloat(/MemAvailable:[ ]+(\d+)/.exec(fs.readFileSync('/proc/meminfo', 'utf8'))[1]*1024)
-  }else{
+  } else {
     freeRam = os.freemem();
   }
   usedRam = totalRam - freeRam;
@@ -142,7 +142,7 @@ setInterval(function() {
     ramStats['time'] = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     chartLogs.push([ramStats['time'], parseFloat(ramStats['freeRam'])]);
     allLogs.push([ramStats['time'], parseFloat(ramStats['freeRam'])]);
-    if (chartLogs.length >= 10) { chartLogs.splice(1, 1); };
+    if (chartLogs.length >= 10) { chartLogs.splice(0, 1); };
     oldRam = ramStats['freeRam'] / 1024;
     logs.push({...ramStats});
     send = true;

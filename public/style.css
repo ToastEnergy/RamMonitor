@@ -52,7 +52,7 @@ td, th {
 	text-align: center;
 }
 
-#chart_div {
+#lineChart {
 	margin-top: 12px;
 	margin-bottom: 3px;
 	width: 80%;
@@ -62,10 +62,6 @@ td, th {
 	fill: #111213 !important;
 }
 
-text {
+#speed text { 
 	fill: white !important;
-}
-
-#chart_div div div div svg g:last-child g:last-child text { 
-	fill: black !important;
-}
+} 
