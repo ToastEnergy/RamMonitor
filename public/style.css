@@ -65,3 +65,11 @@ td, th {
 #speed text { 
 	fill: white !important;
 } 
+
+@media only screen and (max-width: 600px) {
+	.chart {
+		margin-top: 12px;
+		margin-bottom: 3px;
+		width: 100%;
+	}
+}
