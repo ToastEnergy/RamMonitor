@@ -1,5 +1,5 @@
 var config = {
-    host: null,
+    host: 'localhost',
     port: 5000,
     protocol: 'http'
 };
