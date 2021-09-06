@@ -21,24 +21,10 @@ var lineChart = new Chart(ctx, {
       datasets: [{
           label: 'RAM',
           data: [],
-          borderColor: [
-            "#e8ff8a",
-            "#e8ff8a",
-            "#e8ff8a",
-            "#e8ff8a",
-            "#e8ff8a",
-            "#e8ff8a"
-          ],
-          borderWidth: 1
+          borderColor: "#fc4949",
+          borderWidth: 3
       }]
-  },
-  options: {
-      scales: {
-          x: {
-              beginAtZero: false
-          }
-      }
-  }   
+  }
 });
   
 google.charts.load('current', {'packages': ['gauge']});
@@ -120,8 +106,6 @@ async function saveLogs() {
   let json = await res.json();
 
   var image = lineChart.toBase64Image();
-  window.open(image);
-  console.log(image);
-
+  await downloadImage(image, json['filename']);
   alert(`logs saved on logs/${json['filename']}.json`);
 }
