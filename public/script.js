@@ -53,7 +53,7 @@ function drawSpeed() {
 }
 
 (function connect(){
-    let socket = io.connect(socketUrl);
+    let socket = io.connect();
 
 		socket.on('ramUsage', data => {
 
